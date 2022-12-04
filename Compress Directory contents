@@ -1,0 +1,16 @@
+
+---
+ - name: Ansible archive Examples
+   user: Benutzername
+   hosts: localhost (bzw. 127.0.0.1)
+   tasks:
+    - name: Compress Directory contents
+      become: yes
+      archive:
+        path: /apps/tomcat
+        dest: /apps/tomcat.zip
+        format: zip
+
+
+Terminal
+"ansible-playbook archivieren.yml --ask-become-pass"
