@@ -1,8 +1,8 @@
 
 ---
  - name: Ansible archive Examples
-   user: Benutzername
-   hosts: localhost (bzw. 127.0.0.1)
+   user: username
+   hosts: localhost
    tasks:
     - name: Compress Directory contents
       become: yes
