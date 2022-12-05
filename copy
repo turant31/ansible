@@ -10,15 +10,15 @@
       tags:
         - simple_copy
 
----
-# copy_file.yml
-- name: copy files to destination
+# copy_dir.yml
+- name: copy module for directories
   hosts: localhost
   connection: local
   tasks:
-    - name: copy src.txt as dest.txt in the same dir
+    - name: copy dir1 to /tmp
       copy:
-        src: /source-path
-        dest: /destination-path
+        src: dir1
+        dest: /tmp/
+        directory_mode:
       tags:
-        - simple_copy
+        - parentdir
