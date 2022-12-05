@@ -1,0 +1,11 @@
+# copy_file.yml
+- name: copy files to destination
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: copy src.txt as dest.txt in the same dir
+      copy:
+        src: /data/testfile.txt
+        dest: /user/Desktop
+      tags:
+        - simple_copy
