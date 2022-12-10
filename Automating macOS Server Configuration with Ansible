@@ -1,0 +1,45 @@
+Automating macOS Server Configuration with Ansible
+
+Remotelogin aktivieren:
+#sudo systemsetup -setremotelogin on
+
+No password for vagrant:
+#sudo visudo
+Set:
+%admin          ALL=(ALL) NOPASSWD: ALL
+
+optional:
+#xcode-select --install
+#pip install ansible
+
+#git clone https://github.com/geerlingguy/mac-dev-playbook.git
+
+__
+inventory.yml
+[all:vars]
+anisble_connection=ssh
+ansible_ssh_user=admin
+ansible_ssh_pass=<ssh password=""></ssh>
+
+[hosts]
+Port_8823_VM-1 ansible_ssh_port=8823 ansible_ssh_host=10.10.10.16
+__
+main.yml
+---
+- hosts: all
+
+ vars_files:
+   - default.config.yml
+...
+___
+Edit ansible.cfg
+[defaults]
+host_key_checking = False
+
+___
+
+
+#ansible-galaxy install -r requirements.yml
+
+
+#ansible-playbook main.yml -i inventory —ask-become-pass
