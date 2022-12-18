@@ -23,12 +23,23 @@ $ ansible-playbook --ask-vault-pass site.yml
 Playbook ausführen mit verschlüsselter Datei (ohne Passwort-Eingabe)
 $ ansible-playbook --vault-password-file my-vault-password.py
 
-____
+__________________________________________
 
+Ausführen eines Playbooks mit einer ausgewählten Inventory und weiteren Abfragen siehe unten:
 Beispiel:
-ansible-master@ip-172-31-82-153:~/ansible$ ansible-playbook -i slave-inventory encrypted_playbook-09.yml --ask-vault-pass -kK
+ansible-master@ip-172-31-82-153:~/ansible 
+$ ansible-playbook -i slave-inventory encrypted_playbook-09.yml --ask-vault-pass -kK
 
 --ask-vault-password=Vault password
 --ask-become-password= Sudo password (oder stattdessen -K)
 -k = SSH password
+__________________________________________
+
+Ausführen eines Playbooks mit einer ausgewählten Inventory:
+worin eine variable in verschlüsselt in einer anderen yml-Datei eingefügt wird für z.B. sensible Passwörter, hier sudo.
+1. vi slave_inventory.yml --> ansible_become=yes ansible_become_method=sudo ansible_become_pass='{{my_cluster_sudo_pass}}' einfügen.
+2. vi sudo_pass.yml das my_cluter_sudo_pass='HIERSTEHTDASPASSWORT' einfügen.
+3. Für Ausführen dann: ansible-playbook -i slave-inventory playbook-09.yml --ask-vault-pass --extra-vars '@sudo_pass.yml'
+
+
 
