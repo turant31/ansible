@@ -1,0 +1,33 @@
+Erstellen einer verschlüsselten Datei
+$ ansible-vault create vaulted_vars.yml
+
+Editieren einer verschlüsselten Datei
+$ ansible-vault edit vaulted_vars.yml
+
+Ändern des Passworts einer verschlüsselten Datei
+$ ansible-vault rekey vaulted_vars.yml
+
+Verschlüsseln/Encrypten einer bereits vorhandenen Datei
+$ ansible-vault encrypt vaulted_neueDatei.yml
+
+Entschlüsseln/Decrypten einer verschlüsseltene Datei
+$ ansible-vault decrypt vaulted_vars.yml
+
+Sehen einer verschlüsselten Datei, ohne bearbeiten zu können
+$ ansible-vault view vaulted_vars.yml
+
+
+Playbook ausführen mit verschlüsselter Datei (mit Passwort-Eingabe)
+$ ansible-playbook --ask-vault-pass site.yml
+
+Playbook ausführen mit verschlüsselter Datei (ohne Passwort-Eingabe)
+$ ansible-playbook --vault-password-file my-vault-password.py
+
+____
+
+Beispiel:
+ansible-master@ip-172-31-82-153:~/ansible$ ansible-playbook -i slave-inventory encrypted_playbook-09.yml --ask-vault-pass -kK
+
+--ask-vault-password = Vault password
+-k = SSH password
+-K = Sudo password
