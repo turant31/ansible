@@ -1,0 +1,15 @@
+ansible slave anpingen und playbook pushen
+
+
+$ ansible -i slave-inventory -m ping ansible-slave
+
+ansible-master@ip-172-XX-XX-XX:~/ansible
+$ ansible-playbook -i slave-inventory helloansible.yml
+
+wenn sudo gefragt wird:
+ansible-master@ip-172-31-82-153:~/ansible
+$ ansible-playbook -i slave-inventory playbook-09.yml -kK
+
+Wichtig: Vor dem Anpingen unbedingt das ansible_ssh_password im inventory weglassen, da Password und Pfad beim ersten Pingen nicht funktioniert. Erst wenn host key  bekannt ist beim Slave, kann auf den Slave zugegriffen werden
+
+Wichtig2: Vom Lokalhost inventory, hier localinventory.yml
