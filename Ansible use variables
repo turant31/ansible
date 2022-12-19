@@ -27,3 +27,39 @@ ansible_become_pass='{{my_cluster_sudo_pass}}'
 3)
 my_cluster_sudo_pass: ###
 ssh_password: ###
+______________________________________________________________________________________________________
+
+ansible-playbook -i slave-inventoryINIway  playbook-02.yml --ask-vault-pass  --extra-vars '@sudo_pass.yml'
+
+playbook-02.yml:
+---
+- hosts: all
+  vars:
+    - username: ansible-master
+    - home: /home/ansible-master
+  tasks:
+    - name: print variables
+      debug:
+        msg: "Username: {{ username }}, Home dir: {{ home }}"
+        
+Output:
+ 
+Vault password:
+[WARNING]: Invalid characters were found in group names but not replaced, use -vvvv to see
+details
+
+PLAY [all] ***********************************************************************************
+
+TASK [Gathering Facts] ***********************************************************************
+ok: [11.22.33.44]
+
+TASK [print variables] ***********************************************************************
+ok: [11.22.33.44] => {
+    "msg": "Username: ansible-master, Home dir: /home/ansible-master"
+}
+
+PLAY RECAP ***********************************************************************************
+11.22.33.44              : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0 
+        
+
+
