@@ -1,0 +1,5 @@
+$ ansible all -i slave-inventoryINIway -m setup --ask-vault-pass --extra-vars '@sudo_pass.yml'
+
+
+Only IPv4:
+$ ansible all -i slave-inventoryINIway -m setup -a "filter=*ipv4*" --ask-vault-pass --extra-vars '@sudo_pass.yml'
