@@ -14,17 +14,3 @@ Playbook-03.yml
         msg: "IPv4 address: {{ ansible_default_ipv4.address }}"
         
 $ ansible-playbook -i slave-inventoryINIway playbook-03.yml --ask-vault-pass --extra-vars '@sudo_pass.yml'
-
-Output:
-PLAY [all] ***********************************************************************************
-
-TASK [Gathering Facts] ***********************************************************************
-ok: [11.22.33.44]
-
-TASK [print facts] ***************************************************************************
-ok: [11.22.33.44] => {
-    "msg": "IPv4 address: 11.22.33.44"
-}
-
-PLAY RECAP ***********************************************************************************
-11.22.33.44              : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
