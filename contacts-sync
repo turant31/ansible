@@ -1,0 +1,61 @@
+---
+- name: Fetch Placetel contacts and import to MacBook
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - ~/ansible/vaulted_vars.yml
+  tasks:
+
+    - name: get contacts from placetel
+      uri:
+        url: https://api.placetel.de/v2/contacts/?per_page=5
+        method: GET
+        timeout: 30
+        status_code: [200]
+        body_format: json
+        headers:
+          Content-Type: application/json
+          Authorization: "{{ placetel_token }}"
+        force_basic_auth: yes
+        return_content: yes
+      register: contacts
+      debugger: on_failed
+
+    - name: Print contacts json from request
+      debug:
+       msg: "{{ contacts }}"
+      #register: 
+
+    - name: Create contacts json file locally
+      copy:
+        content: "{{ contacts }}"
+        dest: "~/Desktop/contacts/contacts2.json"
+
+    - name: Display contacts json cat
+      shell: 
+          "cat ~/Desktop/contacts/contacts2.json"
+      register: result
+
+    - name: Save content contacts json as "jsondata"
+      set_fact:
+        jsondata: "{{ result.stdout | from_json }}"
+
+    - name: Print jsondata
+      debug:
+       msg: "{{ jsondata }}"
+      #register: 
+
+    - name: select json keyword content from jsondata
+      set_fact:
+        selected_jsondata: "{{ jsondata | json_query(jmesquery) }}"
+      vars:
+          jmesquery: 'json'
+
+    - name: Print jsondata
+      debug:
+       msg: "{{ selected_jsondata }}"
+      #register: 
+  #######################################################
+
+    
+#Kurzwahl,Vorname,Nachname,Telefon (Arbeit),Email
