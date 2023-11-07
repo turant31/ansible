@@ -11,3 +11,29 @@ blocks:
         - name: 'Job #1'
           commands:
             - checkout
+  - name: 'Block #2'
+    task:
+      jobs:
+        - name: 'Job #1'
+          commands: []
+  - name: 'Block #3'
+    task:
+      jobs:
+        - name: 'Job #1'
+          commands: []
+  - name: 'Block #4'
+    task:
+      jobs:
+        - name: 'Job #1'
+          commands: []
+after_pipeline:
+  task:
+    jobs:
+      - name: 'Job #1'
+        commands:
+          - whoami
+      - name: 'Job #2'
+        commands:
+          - curl ifconfig.me
+      - name: 'Job #3'
+        commands: []
